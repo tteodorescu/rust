@@ -32,13 +32,13 @@ fn demo_ge_partial(_1: &(f32, f32), _2: &(f32, f32)) -> bool {
         _4 = copy ((*_2).0: f32);
         StorageLive(_5);
         _5 = Eq(copy _3, copy _4);
-        switchInt(move _5) -> [0: bb1, otherwise: bb2];
+        switchInt(copy _5) -> [0: bb1, otherwise: bb2];
     }
 
     bb1: {
         StorageLive(_6);
         _6 = Ge(copy _3, copy _4);
-        _7 = ControlFlow::<bool>::Break(move _6);
+        _7 = ControlFlow::<bool>::Break(copy _6);
         StorageDead(_6);
         StorageDead(_5);
         StorageDead(_4);

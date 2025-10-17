@@ -23,12 +23,12 @@ fn <impl at $DIR/derived_ord_debug.rs:6:10: 6:20>::partial_cmp(_1: &MultiField, 
 
     bb1: {
         _6 = discriminant(_5);
-        switchInt(move _6) -> [1: bb2, 0: bb4, otherwise: bb6];
+        switchInt(copy _6) -> [1: bb2, 0: bb4, otherwise: bb6];
     }
 
     bb2: {
         _7 = discriminant(((_5 as Some).0: std::cmp::Ordering));
-        switchInt(move _7) -> [0: bb3, otherwise: bb4];
+        switchInt(copy _7) -> [0: bb3, otherwise: bb4];
     }
 
     bb3: {

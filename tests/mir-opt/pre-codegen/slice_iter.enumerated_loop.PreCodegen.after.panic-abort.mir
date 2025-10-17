@@ -194,7 +194,7 @@ fn enumerated_loop(_1: &[T], _2: impl Fn(usize, &T)) -> () {
         _16 = Eq(copy _14, copy _15);
         StorageDead(_15);
         StorageDead(_14);
-        switchInt(move _16) -> [0: bb6, otherwise: bb7];
+        switchInt(copy _16) -> [0: bb6, otherwise: bb7];
     }
 
     bb6: {
@@ -270,14 +270,14 @@ fn enumerated_loop(_1: &[T], _2: impl Fn(usize, &T)) -> () {
         StorageDead(_23);
         _25 = copy _10;
         _26 = AddWithOverflow(copy _10, const 1_usize);
-        assert(!move (_26.1: bool), "attempt to compute `{} + {}`, which would overflow", copy _10, const 1_usize) -> [success: bb14, unwind unreachable];
+        assert(!copy (_26.1: bool), "attempt to compute `{} + {}`, which would overflow", copy _10, const 1_usize) -> [success: bb14, unwind unreachable];
     }
 
     bb14: {
-        _10 = move (_26.0: usize);
+        _10 = copy (_26.0: usize);
         StorageLive(_27);
         _27 = (copy _25, copy _24);
-        _28 = Option::<(usize, &T)>::Some(move _27);
+        _28 = Option::<(usize, &T)>::Some(copy _27);
         StorageDead(_27);
         StorageDead(_26);
         StorageDead(_25);

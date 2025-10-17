@@ -56,9 +56,9 @@ fn range_loop(_1: &[T], _2: impl Fn(usize, &T)) -> () {
         StorageLive(_6);
         StorageLive(_5);
         _5 = copy _4;
-        _6 = Lt(move _5, copy _3);
+        _6 = Lt(copy _5, copy _3);
         StorageDead(_5);
-        switchInt(move _6) -> [0: bb2, otherwise: bb4];
+        switchInt(copy _6) -> [0: bb2, otherwise: bb4];
     }
 
     bb2: {
@@ -78,7 +78,7 @@ fn range_loop(_1: &[T], _2: impl Fn(usize, &T)) -> () {
         StorageDead(_6);
         _9 = copy ((_8 as Some).0: usize);
         _10 = Lt(copy _9, copy _3);
-        assert(move _10, "index out of bounds: the length is {} but the index is {}", copy _3, copy _9) -> [success: bb5, unwind unreachable];
+        assert(copy _10, "index out of bounds: the length is {} but the index is {}", copy _3, copy _9) -> [success: bb5, unwind unreachable];
     }
 
     bb5: {

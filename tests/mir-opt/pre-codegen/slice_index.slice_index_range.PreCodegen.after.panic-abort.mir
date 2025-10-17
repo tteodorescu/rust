@@ -30,11 +30,11 @@ fn slice_index_range(_1: &[u32], _2: std::ops::Range<usize>) -> &[u32] {
     }
 
     bb0: {
-        _3 = move (_2.0: usize);
-        _4 = move (_2.1: usize);
+        _3 = copy (_2.0: usize);
+        _4 = copy (_2.1: usize);
         StorageLive(_5);
         _5 = Lt(copy _4, copy _3);
-        switchInt(move _5) -> [0: bb1, otherwise: bb4];
+        switchInt(copy _5) -> [0: bb1, otherwise: bb4];
     }
 
     bb1: {
@@ -43,8 +43,8 @@ fn slice_index_range(_1: &[u32], _2: std::ops::Range<usize>) -> &[u32] {
         StorageLive(_8);
         StorageLive(_7);
         _7 = PtrMetadata(copy _1);
-        _8 = Le(copy _4, move _7);
-        switchInt(move _8) -> [0: bb2, otherwise: bb3];
+        _8 = Le(copy _4, copy _7);
+        switchInt(copy _8) -> [0: bb2, otherwise: bb3];
     }
 
     bb2: {

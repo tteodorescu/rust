@@ -138,7 +138,7 @@ fn slice_iter_mut_next_back(_1: &mut std::slice::IterMut<'_, T>) -> Option<&mut 
     }
 
     bb7: {
-        (*_11) = move _12;
+        (*_11) = copy _12;
         _15 = copy (*_11);
         goto -> bb9;
     }
@@ -151,9 +151,9 @@ fn slice_iter_mut_next_back(_1: &mut std::slice::IterMut<'_, T>) -> Option<&mut 
         StorageLive(_19);
         StorageLive(_18);
         _18 = copy (*_17);
-        _19 = SubUnchecked(move _18, const 1_usize);
+        _19 = SubUnchecked(copy _18, const 1_usize);
         StorageDead(_18);
-        (*_17) = move _19;
+        (*_17) = copy _19;
         StorageDead(_19);
         _15 = copy ((*_1).0: std::ptr::NonNull<T>);
         goto -> bb9;

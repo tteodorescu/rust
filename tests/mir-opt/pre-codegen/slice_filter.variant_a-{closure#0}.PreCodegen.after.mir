@@ -75,7 +75,7 @@ fn variant_a::{closure#0}(_1: &mut {closure@$DIR/slice_filter.rs:7:25: 7:39}, _2
         _4 = copy ((*_3).0: usize);
         _5 = copy ((*_3).2: usize);
         _6 = Le(copy _4, copy _5);
-        switchInt(move _6) -> [0: bb2, otherwise: bb1];
+        switchInt(copy _6) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
@@ -86,10 +86,10 @@ fn variant_a::{closure#0}(_1: &mut {closure@$DIR/slice_filter.rs:7:25: 7:39}, _2
         _7 = copy ((*_3).3: usize);
         StorageLive(_8);
         _8 = copy ((*_3).1: usize);
-        _9 = Le(move _7, move _8);
+        _9 = Le(copy _7, copy _8);
         StorageDead(_8);
         StorageDead(_7);
-        switchInt(move _9) -> [0: bb2, otherwise: bb6];
+        switchInt(copy _9) -> [0: bb2, otherwise: bb6];
     }
 
     bb2: {
@@ -97,7 +97,7 @@ fn variant_a::{closure#0}(_1: &mut {closure@$DIR/slice_filter.rs:7:25: 7:39}, _2
         // DBG: _21 = &_15;
         // DBG: _22 = &?;
         _10 = Le(copy _5, copy _4);
-        switchInt(move _10) -> [0: bb3, otherwise: bb4];
+        switchInt(copy _10) -> [0: bb3, otherwise: bb4];
     }
 
     bb3: {
@@ -112,7 +112,7 @@ fn variant_a::{closure#0}(_1: &mut {closure@$DIR/slice_filter.rs:7:25: 7:39}, _2
         _11 = copy ((*_3).1: usize);
         StorageLive(_12);
         _12 = copy ((*_3).3: usize);
-        _0 = Le(move _11, move _12);
+        _0 = Le(copy _11, copy _12);
         StorageDead(_12);
         StorageDead(_11);
         goto -> bb5;

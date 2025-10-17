@@ -240,7 +240,7 @@ fn reverse_loop(_1: &[T], _2: impl Fn(&T)) -> () {
     }
 
     bb11: {
-        (*_22) = move _23;
+        (*_22) = copy _23;
         _26 = copy (*_22);
         goto -> bb13;
     }
@@ -253,9 +253,9 @@ fn reverse_loop(_1: &[T], _2: impl Fn(&T)) -> () {
         StorageLive(_30);
         StorageLive(_29);
         _29 = copy (*_28);
-        _30 = SubUnchecked(move _29, const 1_usize);
+        _30 = SubUnchecked(copy _29, const 1_usize);
         StorageDead(_29);
-        (*_28) = move _30;
+        (*_28) = copy _30;
         StorageDead(_30);
         _26 = copy ((_12.0: std::slice::Iter<'_, T>).0: std::ptr::NonNull<T>);
         goto -> bb13;

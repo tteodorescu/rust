@@ -156,7 +156,7 @@ fn forward_loop(_1: &[T], _2: impl Fn(&T)) -> () {
         _15 = Eq(copy _13, copy _14);
         StorageDead(_14);
         StorageDead(_13);
-        switchInt(move _15) -> [0: bb6, otherwise: bb7];
+        switchInt(copy _15) -> [0: bb6, otherwise: bb7];
     }
 
     bb6: {

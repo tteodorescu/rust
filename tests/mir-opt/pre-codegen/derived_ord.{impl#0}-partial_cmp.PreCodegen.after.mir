@@ -24,12 +24,12 @@ fn <impl at $DIR/derived_ord.rs:5:10: 5:20>::partial_cmp(_1: &MultiField, _2: &M
         _3 = copy ((*_1).0: char);
         StorageLive(_4);
         _4 = copy ((*_2).0: char);
-        _5 = Cmp(move _3, move _4);
+        _5 = Cmp(copy _3, copy _4);
         StorageDead(_4);
         StorageDead(_3);
         _0 = Option::<std::cmp::Ordering>::Some(copy _5);
         _6 = discriminant(_5);
-        switchInt(move _6) -> [0: bb1, otherwise: bb2];
+        switchInt(copy _6) -> [0: bb1, otherwise: bb2];
     }
 
     bb1: {
@@ -38,10 +38,10 @@ fn <impl at $DIR/derived_ord.rs:5:10: 5:20>::partial_cmp(_1: &MultiField, _2: &M
         _7 = copy ((*_1).1: i16);
         StorageLive(_8);
         _8 = copy ((*_2).1: i16);
-        _9 = Cmp(move _7, move _8);
+        _9 = Cmp(copy _7, copy _8);
         StorageDead(_8);
         StorageDead(_7);
-        _0 = Option::<std::cmp::Ordering>::Some(move _9);
+        _0 = Option::<std::cmp::Ordering>::Some(copy _9);
         StorageDead(_9);
         goto -> bb3;
     }

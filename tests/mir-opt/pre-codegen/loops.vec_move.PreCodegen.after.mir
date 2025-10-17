@@ -199,7 +199,7 @@ fn vec_move(_1: Vec<impl Sized>) -> () {
         _8 = copy ((_2.0: std::vec::Vec<impl Sized>).1: usize);
         StorageLive(_9);
         _9 = Le(copy _8, const <impl Sized as std::mem::SizedTypeProperties>::MAX_SLICE_LEN);
-        assume(move _9);
+        assume(copy _9);
         StorageDead(_9);
         _10 = Offset(copy _7, copy _8);
         _11 = copy _10 as *const impl Sized (PtrToPtr);
@@ -215,7 +215,7 @@ fn vec_move(_1: Vec<impl Sized>) -> () {
         _12 = copy ((_2.0: std::vec::Vec<impl Sized>).1: usize);
         StorageLive(_13);
         _13 = Le(copy _12, const <impl Sized as std::mem::SizedTypeProperties>::MAX_SLICE_LEN);
-        assume(move _13);
+        assume(copy _13);
         StorageDead(_13);
         StorageLive(_18);
         StorageLive(_14);
@@ -244,7 +244,7 @@ fn vec_move(_1: Vec<impl Sized>) -> () {
         // DBG: _39 = &(((_2.0: std::vec::Vec<impl Sized>).0: alloc::raw_vec::RawVec<impl Sized>).0: alloc::raw_vec::RawVecInner);
         StorageLive(_19);
         _19 = SizeOf(impl Sized);
-        switchInt(move _19) -> [0: bb5, otherwise: bb6];
+        switchInt(copy _19) -> [0: bb5, otherwise: bb6];
     }
 
     bb5: {
@@ -262,7 +262,7 @@ fn vec_move(_1: Vec<impl Sized>) -> () {
 
     bb7: {
         StorageDead(_19);
-        _22 = std::vec::IntoIter::<impl Sized> { buf: copy _6, phantom: const ZeroSized: PhantomData<impl Sized>, cap: move _20, alloc: const ManuallyDrop::<std::alloc::Global> {{ value: std::alloc::Global }}, ptr: copy _6, end: copy _11 };
+        _22 = std::vec::IntoIter::<impl Sized> { buf: copy _6, phantom: const ZeroSized: PhantomData<impl Sized>, cap: copy _20, alloc: const ManuallyDrop::<std::alloc::Global> {{ value: std::alloc::Global }}, ptr: copy _6, end: copy _11 };
         StorageDead(_2);
         StorageDead(_17);
         StorageDead(_4);
@@ -272,7 +272,7 @@ fn vec_move(_1: Vec<impl Sized>) -> () {
         StorageDead(_7);
         StorageDead(_6);
         StorageLive(_23);
-        _23 = move _22;
+        _23 = copy _22;
         goto -> bb8;
     }
 
@@ -284,7 +284,7 @@ fn vec_move(_1: Vec<impl Sized>) -> () {
 
     bb9: {
         _26 = discriminant(_25);
-        switchInt(move _26) -> [0: bb10, 1: bb12, otherwise: bb14];
+        switchInt(copy _26) -> [0: bb10, 1: bb12, otherwise: bb14];
     }
 
     bb10: {
@@ -299,7 +299,7 @@ fn vec_move(_1: Vec<impl Sized>) -> () {
     }
 
     bb12: {
-        _27 = move ((_25 as Some).0: impl Sized);
+        _27 = copy ((_25 as Some).0: impl Sized);
         _28 = opaque::<impl Sized>(move _27) -> [return: bb13, unwind: bb15];
     }
 
