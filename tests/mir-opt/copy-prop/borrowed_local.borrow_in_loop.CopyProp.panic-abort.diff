@@ -46,12 +46,14 @@
 -         StorageLive(_6);
           StorageLive(_7);
           _7 = copy (*_2);
-          _6 = Not(move _7);
+-         _6 = Not(move _7);
++         _6 = Not(copy _7);
           StorageDead(_7);
 -         StorageLive(_8);
           StorageLive(_9);
           _9 = copy (*_2);
-          _8 = Not(move _9);
+-         _8 = Not(move _9);
++         _8 = Not(copy _9);
           StorageDead(_9);
 -         StorageLive(_10);
 -         _10 = copy _6;
@@ -62,7 +64,8 @@
           StorageLive(_12);
           _12 = &_1;
           _11 = &(*_12);
-          _2 = move _11;
+-         _2 = move _11;
++         _2 = copy _11;
           StorageDead(_11);
           StorageDead(_12);
           StorageLive(_13);
@@ -71,8 +74,9 @@
 -         StorageLive(_15);
 -         _15 = copy _8;
 -         _13 = Ne(move _14, move _15);
+-         switchInt(move _13) -> [0: bb3, otherwise: bb2];
 +         _13 = Ne(copy _6, copy _8);
-          switchInt(move _13) -> [0: bb3, otherwise: bb2];
++         switchInt(copy _13) -> [0: bb3, otherwise: bb2];
       }
   
       bb2: {

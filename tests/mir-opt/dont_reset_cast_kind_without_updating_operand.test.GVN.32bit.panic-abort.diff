@@ -83,7 +83,7 @@
           StorageLive(_16);
           StorageLive(_18);
           _18 = const false;
--         switchInt(move _18) -> [0: bb6, otherwise: bb5];
+-         switchInt(copy _18) -> [0: bb6, otherwise: bb5];
 +         switchInt(const false) -> [0: bb6, otherwise: bb5];
       }
   
@@ -156,7 +156,7 @@
           StorageDead(_18);
           StorageLive(_20);
 -         _20 = copy _11 as std::ptr::Alignment (Transmute);
--         _13 = Layout { size: copy _10, align: move _20 };
+-         _13 = Layout { size: copy _10, align: copy _20 };
 +         _20 = const std::ptr::Alignment(std::ptr::alignment::AlignmentEnum::_Align1Shl0);
 +         _13 = const Layout {{ size: 0_usize, align: std::ptr::Alignment(std::ptr::alignment::AlignmentEnum::_Align1Shl0) }};
           StorageDead(_20);
@@ -167,7 +167,7 @@
   
       bb7: {
           _15 = discriminant(_14);
-          switchInt(move _15) -> [0: bb4, 1: bb3, otherwise: bb2];
+          switchInt(copy _15) -> [0: bb4, 1: bb3, otherwise: bb2];
       }
 + }
 + 

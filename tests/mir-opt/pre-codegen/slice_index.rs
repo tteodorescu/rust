@@ -34,8 +34,8 @@ pub fn slice_index_range(slice: &[u32], index: Range<usize>) -> &[u32] {
 // EMIT_MIR slice_index.slice_get_unchecked_mut_range.PreCodegen.after.mir
 pub unsafe fn slice_get_unchecked_mut_range(slice: &mut [u32], index: Range<usize>) -> &mut [u32] {
     // CHECK-LABEL: slice_get_unchecked_mut_range
-    // CHECK: [[START:_[0-9]+]] = move (_2.0: usize);
-    // CHECK: [[END:_[0-9]+]] = move (_2.1: usize);
+    // CHECK: [[START:_[0-9]+]] = copy (_2.0: usize);
+    // CHECK: [[END:_[0-9]+]] = copy (_2.1: usize);
     // CHECK: precondition_check
     // CHECK: [[LEN:_[0-9]+]] = SubUnchecked(copy [[END]], copy [[START]]);
     // CHECK: [[PTR:_[0-9]+]] = Offset(copy {{_[0-9]+}}, copy [[START]]);

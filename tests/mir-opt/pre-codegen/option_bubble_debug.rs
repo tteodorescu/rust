@@ -10,7 +10,7 @@ pub fn option_direct(x: Option<u32>) -> Option<u32> {
     // CHECK-LABEL: fn option_direct(_1: Option<u32>) -> Option<u32>
     // CHECK: = discriminant(_1);
     // CHECK: [[TEMP:_.+]] = Not({{.+}});
-    // CHECK: _0 = Option::<u32>::Some(move [[TEMP]]);
+    // CHECK: _0 = Option::<u32>::Some(copy [[TEMP]]);
 
     match x {
         Some(x) => Some(!x),
@@ -23,7 +23,7 @@ pub fn option_traits(x: Option<u32>) -> Option<u32> {
     // CHECK-LABEL: fn option_traits(_1: Option<u32>) -> Option<u32>
     // CHECK: = <Option<u32> as Try>::branch(copy _1)
     // CHECK: [[TEMP:_.+]] = Not({{.+}});
-    // CHECK: _0 = <Option<u32> as Try>::from_output(move [[TEMP]])
+    // CHECK: _0 = <Option<u32> as Try>::from_output(copy [[TEMP]])
 
     try { !(x?) }
 }

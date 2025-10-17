@@ -67,7 +67,7 @@ fn mapped(_1: impl Iterator<Item = T>, _2: impl Fn(T) -> U) -> () {
         StorageLive(_8);
         StorageLive(_9);
         _8 = discriminant(_6);
-        switchInt(move _8) -> [0: bb4, 1: bb6, otherwise: bb9];
+        switchInt(copy _8) -> [0: bb4, 1: bb6, otherwise: bb9];
     }
 
     bb4: {
@@ -85,7 +85,7 @@ fn mapped(_1: impl Iterator<Item = T>, _2: impl Fn(T) -> U) -> () {
     }
 
     bb6: {
-        _9 = move ((_6 as Some).0: T);
+        _9 = copy ((_6 as Some).0: T);
         StorageLive(_11);
         StorageLive(_10);
         _10 = (copy _9,);
@@ -94,7 +94,7 @@ fn mapped(_1: impl Iterator<Item = T>, _2: impl Fn(T) -> U) -> () {
 
     bb7: {
         StorageDead(_10);
-        _12 = Option::<U>::Some(move _11);
+        _12 = Option::<U>::Some(copy _11);
         StorageDead(_11);
         StorageDead(_9);
         StorageDead(_8);

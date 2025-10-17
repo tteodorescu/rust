@@ -40,7 +40,7 @@ fn num_to_digit(_1: char) -> u32 {
     bb3: {
         StorageLive(_5);
         _5 = discriminant(_4);
-        switchInt(move _5) -> [0: bb4, 1: bb5, otherwise: bb6];
+        switchInt(copy _5) -> [0: bb4, 1: bb5, otherwise: bb6];
     }
 
     bb4: {
@@ -48,7 +48,7 @@ fn num_to_digit(_1: char) -> u32 {
     }
 
     bb5: {
-        _0 = move ((_4 as Some).0: u32);
+        _0 = copy ((_4 as Some).0: u32);
         StorageDead(_5);
         StorageDead(_4);
         goto -> bb8;

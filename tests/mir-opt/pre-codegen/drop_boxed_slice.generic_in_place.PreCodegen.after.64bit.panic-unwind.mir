@@ -76,7 +76,7 @@ fn generic_in_place(_1: *mut Box<[T]>) -> () {
         _6 = AlignOf(T);
         StorageLive(_7);
         _7 = copy _6 as std::ptr::Alignment (Transmute);
-        _8 = move (_7.0: std::ptr::alignment::AlignmentEnum);
+        _8 = copy (_7.0: std::ptr::alignment::AlignmentEnum);
         StorageDead(_7);
         StorageDead(_6);
         StorageDead(_4);

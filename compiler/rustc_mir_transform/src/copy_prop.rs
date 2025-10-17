@@ -46,10 +46,7 @@ impl<'tcx> crate::MirPass<'tcx> for CopyProp {
             return;
         }
 
-        let fully_moved = fully_moved_locals(&ssa, body);
-        debug!(?fully_moved);
-
-        Replacer { tcx, copy_classes: ssa.copy_classes(), fully_moved, storage_to_remove }
+        Replacer { tcx, copy_classes: ssa.copy_classes(), storage_to_remove }
             .visit_body_preserves_cfg(body);
 
         crate::simplify::remove_unused_definitions(body);
@@ -60,43 +57,9 @@ impl<'tcx> crate::MirPass<'tcx> for CopyProp {
     }
 }
 
-/// `SsaLocals` computed equivalence classes between locals considering copy/move assignments.
-///
-/// This function also returns whether all the `move?` in the pattern are `move` and not copies.
-/// A local which is in the bitset can be replaced by `move _a`. Otherwise, it must be
-/// replaced by `copy _a`, as we cannot move multiple times from `_a`.
-///
-/// If an operand copies `_c`, it must happen before the assignment `_d = _c`, otherwise it is UB.
-/// This means that replacing it by a copy of `_a` if ok, since this copy happens before `_c` is
-/// moved, and therefore that `_d` is moved.
-#[instrument(level = "trace", skip(ssa, body))]
-fn fully_moved_locals(ssa: &SsaLocals, body: &Body<'_>) -> DenseBitSet<Local> {
-    let mut fully_moved = DenseBitSet::new_filled(body.local_decls.len());
-
-    for (_, rvalue, _) in ssa.assignments(body) {
-        let Rvalue::Use(Operand::Copy(place) | Operand::Move(place)) = rvalue else {
-            continue;
-        };
-
-        let Some(rhs) = place.as_local() else { continue };
-        if !ssa.is_ssa(rhs) {
-            continue;
-        }
-
-        if let Rvalue::Use(Operand::Copy(_)) = rvalue {
-            fully_moved.remove(rhs);
-        }
-    }
-
-    ssa.meet_copy_equivalence(&mut fully_moved);
-
-    fully_moved
-}
-
 /// Utility to help performing substitution of `*pattern` by `target`.
 struct Replacer<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
-    fully_moved: DenseBitSet<Local>,
     storage_to_remove: DenseBitSet<Local>,
     copy_classes: &'a IndexSlice<Local, Local>,
 }
@@ -123,7 +86,6 @@ impl<'tcx> MutVisitor<'tcx> for Replacer<'_, 'tcx> {
             // A move out of a projection of a copy is equivalent to a copy of the original
             // projection.
             && !place.is_indirect_first_projection()
-            && !self.fully_moved.contains(place.local)
         {
             *operand = Operand::Copy(place);
         }

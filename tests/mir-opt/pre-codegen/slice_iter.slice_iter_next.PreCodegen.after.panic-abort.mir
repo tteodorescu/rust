@@ -75,7 +75,7 @@ fn slice_iter_next(_1: &mut std::slice::Iter<'_, T>) -> Option<&T> {
         _7 = Eq(copy _5, copy _6);
         StorageDead(_6);
         StorageDead(_5);
-        switchInt(move _7) -> [0: bb2, otherwise: bb3];
+        switchInt(copy _7) -> [0: bb2, otherwise: bb3];
     }
 
     bb2: {
@@ -88,7 +88,7 @@ fn slice_iter_next(_1: &mut std::slice::Iter<'_, T>) -> Option<&T> {
         StorageDead(_8);
         _10 = NonNull::<T> { pointer: copy _9 };
         StorageDead(_9);
-        ((*_1).0: std::ptr::NonNull<T>) = move _10;
+        ((*_1).0: std::ptr::NonNull<T>) = copy _10;
         StorageDead(_10);
         goto -> bb7;
     }

@@ -37,7 +37,7 @@ fn step_forward(_1: u16, _2: usize) -> u16 {
         StorageLive(_4);
         StorageLive(_3);
         _3 = Gt(copy _2, const 65535_usize);
-        switchInt(move _3) -> [0: bb1, otherwise: bb5];
+        switchInt(copy _3) -> [0: bb1, otherwise: bb5];
     }
 
     bb1: {

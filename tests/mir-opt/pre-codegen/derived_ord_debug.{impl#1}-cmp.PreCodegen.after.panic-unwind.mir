@@ -22,7 +22,7 @@ fn <impl at $DIR/derived_ord_debug.rs:6:22: 6:25>::cmp(_1: &MultiField, _2: &Mul
 
     bb1: {
         _6 = discriminant(_5);
-        switchInt(move _6) -> [0: bb2, otherwise: bb3];
+        switchInt(copy _6) -> [0: bb2, otherwise: bb3];
     }
 
     bb2: {

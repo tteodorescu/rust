@@ -15,20 +15,20 @@ pub fn demo_le(a: &MultiField, b: &MultiField) -> bool {
 
     // CHECK: [[A0:_[0-9]+]] = copy ((*_1).0: char);
     // CHECK: [[B0:_[0-9]+]] = copy ((*_2).0: char);
-    // CHECK: Cmp(move [[A0]], move [[B0]]);
+    // CHECK: Cmp(copy [[A0]], copy [[B0]]);
 
     // CHECK: [[D0:_[0-9]+]] = discriminant({{.+}});
-    // CHECK: switchInt(move [[D0]]) -> [0: bb{{[0-9]+}}, otherwise: bb{{[0-9]+}}];
+    // CHECK: switchInt(copy [[D0]]) -> [0: bb{{[0-9]+}}, otherwise: bb{{[0-9]+}}];
 
     // CHECK: [[A1:_[0-9]+]] = copy ((*_1).1: i16);
     // CHECK: [[B1:_[0-9]+]] = copy ((*_2).1: i16);
-    // CHECK: Cmp(move [[A1]], move [[B1]]);
+    // CHECK: Cmp(copy [[A1]], copy [[B1]]);
 
     // CHECK: [[D1:_[0-9]+]] = discriminant({{.+}});
-    // CHECK: switchInt(move [[D1]]) -> [0: bb{{[0-9]+}}, 1: bb{{[0-9]+}}, otherwise: bb{{[0-9]+}}];
+    // CHECK: switchInt(copy [[D1]]) -> [0: bb{{[0-9]+}}, 1: bb{{[0-9]+}}, otherwise: bb{{[0-9]+}}];
 
     // CHECK: [[D2:_[0-9]+]] = discriminant({{.+}});
-    // CHECK: _0 = Le(move [[D2]], const 0_i8);
+    // CHECK: _0 = Le(copy [[D2]], const 0_i8);
     *a <= *b
 }
 

@@ -46,22 +46,27 @@
           StorageLive(_6);
           StorageLive(_7);
           _7 = &_2;
-          _6 = move _7 as &[i32] (PointerCoercion(Unsize, Implicit));
+-         _6 = move _7 as &[i32] (PointerCoercion(Unsize, Implicit));
++         _6 = copy _7 as &[i32] (PointerCoercion(Unsize, Implicit));
           StorageDead(_7);
-          _5 = core::slice::<impl [i32]>::len(move _6) -> [return: bb1, unwind unreachable];
+-         _5 = core::slice::<impl [i32]>::len(move _6) -> [return: bb1, unwind unreachable];
++         _5 = core::slice::<impl [i32]>::len(copy _6) -> [return: bb1, unwind unreachable];
       }
   
       bb1: {
           StorageDead(_6);
-          _4 = std::ops::Range::<usize> { start: const 0_usize, end: move _5 };
+-         _4 = std::ops::Range::<usize> { start: const 0_usize, end: move _5 };
++         _4 = std::ops::Range::<usize> { start: const 0_usize, end: copy _5 };
           StorageDead(_5);
-          _3 = <std::ops::Range<usize> as IntoIterator>::into_iter(move _4) -> [return: bb2, unwind unreachable];
+-         _3 = <std::ops::Range<usize> as IntoIterator>::into_iter(move _4) -> [return: bb2, unwind unreachable];
++         _3 = <std::ops::Range<usize> as IntoIterator>::into_iter(copy _4) -> [return: bb2, unwind unreachable];
       }
   
       bb2: {
           StorageDead(_4);
           StorageLive(_8);
-          _8 = move _3;
+-         _8 = move _3;
++         _8 = copy _3;
           goto -> bb3;
       }
   
@@ -72,13 +77,15 @@
           StorageLive(_13);
           _13 = &mut _8;
           _12 = &mut (*_13);
-          _11 = <std::ops::Range<usize> as Iterator>::next(move _12) -> [return: bb4, unwind unreachable];
+-         _11 = <std::ops::Range<usize> as Iterator>::next(move _12) -> [return: bb4, unwind unreachable];
++         _11 = <std::ops::Range<usize> as Iterator>::next(copy _12) -> [return: bb4, unwind unreachable];
       }
   
       bb4: {
           StorageDead(_12);
           _14 = discriminant(_11);
-          switchInt(move _14) -> [0: bb7, 1: bb6, otherwise: bb5];
+-         switchInt(move _14) -> [0: bb7, 1: bb6, otherwise: bb5];
++         switchInt(copy _14) -> [0: bb7, 1: bb6, otherwise: bb5];
       }
   
       bb5: {
@@ -94,7 +101,7 @@
 -         _19 = Lt(copy _18, const 4_usize);
 -         assert(move _19, "index out of bounds: the length is {} but the index is {}", const 4_usize, copy _18) -> [success: bb8, unwind unreachable];
 +         _19 = Lt(copy _16, const 4_usize);
-+         assert(move _19, "index out of bounds: the length is {} but the index is {}", const 4_usize, copy _16) -> [success: bb8, unwind unreachable];
++         assert(copy _19, "index out of bounds: the length is {} but the index is {}", const 4_usize, copy _16) -> [success: bb8, unwind unreachable];
       }
   
       bb7: {
@@ -111,8 +118,9 @@
   
       bb8: {
 -         _17 = copy _2[_18];
+-         _1 = Add(copy _1, move _17);
 +         _17 = copy _2[_16];
-          _1 = Add(copy _1, move _17);
++         _1 = Add(copy _1, copy _17);
           StorageDead(_17);
 -         StorageDead(_18);
 -         _10 = const ();

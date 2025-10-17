@@ -15,7 +15,8 @@
       }
   
       bb1: {
-          _0 = opaque::<u8>(move _3) -> [return: bb2, unwind unreachable];
+-         _0 = opaque::<u8>(move _3) -> [return: bb2, unwind unreachable];
++         _0 = opaque::<u8>(copy _3) -> [return: bb2, unwind unreachable];
       }
   
       bb2: {

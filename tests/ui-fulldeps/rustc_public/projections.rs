@@ -100,11 +100,11 @@ fn test_place_projections() -> ControlFlow<()> {
         {
             match &args[..] {
                 [
-                    rustc_public::mir::Operand::Move(rustc_public::mir::Place {
+                    rustc_public::mir::Operand::Copy(rustc_public::mir::Place {
                         local: _,
                         projection: arg1_proj,
                     }),
-                    rustc_public::mir::Operand::Move(rustc_public::mir::Place {
+                    rustc_public::mir::Operand::Copy(rustc_public::mir::Place {
                         local: _,
                         projection: arg2_proj,
                     }),

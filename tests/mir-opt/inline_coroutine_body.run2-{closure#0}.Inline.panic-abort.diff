@@ -231,7 +231,7 @@
 +         StorageDead(_49);
 +         StorageLive(_50);
 +         _50 = discriminant(_42);
-+         switchInt(move _50) -> [0: bb11, 1: bb12, otherwise: bb5];
++         switchInt(copy _50) -> [0: bb11, 1: bb12, otherwise: bb5];
       }
 + 
 +     bb5: {
@@ -298,7 +298,7 @@
 +     }
 + 
 +     bb12: {
-+         _41 = move ((_42 as Some).0: ());
++         _41 = copy ((_42 as Some).0: ());
 +         StorageDead(_50);
 +         StorageDead(_42);
 +         _18 = Poll::<()>::Ready(move _41);

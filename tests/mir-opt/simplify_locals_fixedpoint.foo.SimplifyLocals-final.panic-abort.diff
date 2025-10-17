@@ -22,16 +22,16 @@
           _2 = Option::<u8>::None;
           StorageLive(_3);
           _3 = Option::<T>::None;
-          _1 = (move _2, move _3);
+          _1 = (copy _2, copy _3);
           StorageDead(_3);
           StorageDead(_2);
           _5 = discriminant((_1.0: std::option::Option<u8>));
-          switchInt(move _5) -> [1: bb1, 0: bb3, otherwise: bb5];
+          switchInt(copy _5) -> [1: bb1, 0: bb3, otherwise: bb5];
       }
   
       bb1: {
           _4 = discriminant((_1.1: std::option::Option<T>));
-          switchInt(move _4) -> [0: bb2, 1: bb3, otherwise: bb5];
+          switchInt(copy _4) -> [0: bb2, 1: bb3, otherwise: bb5];
       }
   
       bb2: {
